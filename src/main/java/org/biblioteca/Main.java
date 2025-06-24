@@ -28,13 +28,16 @@ public class Main {
         }
 
         Usuario usuario1 = new Usuario("Carlos Amador Venganza", 001);
+        Usuario usuario2 = new Usuario("Mauricio Palo De Agua", 002);
 
         try{
             biblioteca.registrarUsuario(usuario1);
+            biblioteca.registrarUsuario(usuario2);
         }catch (IllegalArgumentException e){
             System.out.println("Error al crear el usuario" + e.getMessage());
         }
 
+        try{
         biblioteca.mostrarItemsDisponibles();
         biblioteca.buscarUsuarioPorID(001);
         biblioteca.buscarItemPorID("LB001");
@@ -46,5 +49,11 @@ public class Main {
         biblioteca.mostrarItemsPrestadosPorUsuario(1);
         biblioteca.mostrarItemsDisponibles();
         biblioteca.devolverItem("LB002", 1);
+        biblioteca.eliminarElementoPorID("LB002");
+        biblioteca.eliminarUsuarioPorID(001);
+        biblioteca.eliminarUsuarioPorID(002);
+        }catch (IllegalArgumentException e){
+            System.out.println("Algo salio mal. Intente de nuevo");
+        }
     }
 }
