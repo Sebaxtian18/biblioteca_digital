@@ -2,6 +2,7 @@ package org.biblioteca.Modelo;
 
 import org.biblioteca.Items_Bibliograficos;
 
+/**Representa un item, hijo de {@code Items_Bibliograficos}*/
 public class AudioLibro extends Items_Bibliograficos {
     private String duracion;
     private String narrador;
@@ -33,11 +34,19 @@ public class AudioLibro extends Items_Bibliograficos {
         this.narrador = narrador;
     }
 
+    /**Sobe escritura e implementación del metodo mostrar detalle para el AudioLibro*/
     @Override
     public void mostrarDetalle(Items_Bibliograficos item) throws IllegalArgumentException {
         if (item == null){
             throw new IllegalArgumentException("El item no puede ser nulo.");
         }
-        System.out.println(item);
+        System.out.println("------Detalles------");
+        System.out.println("- Titulo: '" + getTitulo() + "'");
+        System.out.println("- ID: '" + getId() + "'");
+        System.out.println("- Autor: '" + getAutor() + "'");
+        System.out.println("- Duración: '" + getDuracion() + "'");
+        System.out.println("- Narrado por: '" + getNarrador() + "'");
+        System.out.println("- Año Publicación: '" + getAnoPublic() + "'");
+        System.out.println(isEstado() ? "- El Audio libro se encuentra prestado" : "- El Audio libro se encuentra disponible.");
     }
 }

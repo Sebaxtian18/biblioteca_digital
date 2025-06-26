@@ -322,7 +322,7 @@ public class Biblioteca implements IBuscar {
         if (item == null){
             throw new IllegalArgumentException("El item no puede ser nulo.");
         }
-        System.out.println(item);
+        item.mostrarDetalle(item);
     }
 
     /**
@@ -393,5 +393,98 @@ public class Biblioteca implements IBuscar {
 
         listaUsuarios.remove(usuario);
         System.out.println("El usuario: '" + usuario.getNombre() + "' ( ID: " + usuario.getId() + " ) ha sido eliminado.");
+    }
+
+    /**Metodo para mostrar la información del usuario.
+     * El metodo evalua el ingreso del objeto, de no ser así el sistema lanzara un error.
+     * Si el objeto es proporcionado el sistema utiliza el metodo {@code informacionUsuario} del {@code usuario}
+     * y se imprimen su informacion en pantalla.
+     *
+     * @param usuario El usuario sobre el cual se quiere obtener la información.*/
+    public void mostrarInformacionUsuario(Usuario usuario) throws IllegalArgumentException {
+        if (usuario == null){
+            throw new IllegalArgumentException("El usuario no puede ser nulo.");
+        }
+        usuario.informacionUsuario(usuario);
+    }
+
+    /**
+     * Metodo para mostrar los usuarios que estan registrados.
+     * El metodo recorre el la coleccion {@code listaUsuarios} y los imprime en pantalla.*/
+    public void mostrarUsuariosRegistrados(){
+        listaUsuarios.stream().forEach(i -> System.out.println("- Usuario: '" + i.getNombre() + "' ( ID: " + i.getId() + " )"));
+    }
+
+    /**
+     * Metodo para mostrar en pantalla los libros disponible.
+     * El metodo recorre el array coleccionItems, filtra los elementos por la clase {@code Libro},
+     * hace un {@code casteo} y devuelve una lista de objetos.
+     * Se evalua que la lista no este vacía, si es así, se lanza un error,
+     * de lo contrario se imprimen los detalles de cada libro.*/
+    public void mostrarLibrosDisponibles(){
+        List<Libro> librosDisponibles = coleccionItems.stream().filter(i -> i instanceof Libro)
+                .filter(i -> !i.isEstado()).map(i -> (Libro) i).collect(Collectors.toList());
+
+        if (librosDisponibles.isEmpty()){
+            throw new IllegalArgumentException("No hay libros registrados.");
+        }
+
+        for (Libro libro : librosDisponibles){
+            libro.mostrarDetalle(libro);
+        }
+    }
+
+    /**
+     * Metodo para mostrar en pantalla las revistas disponible.
+     * El metodo recorre el array coleccionItems, filtra los elementos por la clase {@code Revista},
+     * hace un {@code casteo} y devuelve una lista de objetos.
+     * Se evalua que la lista no este vacía, si es así, se lanza un error,
+     * de lo contrario se imprimen los detalles de cada revista.*/
+    public void mostrarRevistasDisponibles(){
+        List<Revista> revistasDisponibles = coleccionItems.stream().filter(i -> i instanceof Revista)
+                .filter(i -> !i.isEstado()).map(i -> (Revista) i).collect(Collectors.toList());
+
+        if (revistasDisponibles.isEmpty()){
+            throw new IllegalArgumentException("No hay revistas registradas.");
+        }
+
+        for (Revista revista : revistasDisponibles){
+            revista.mostrarDetalle(revista);
+        }
+    }
+
+    /**
+     * Metodo para mostrar en pantalla los audio libros disponible.
+     * El metodo recorre el array coleccionItems, filtra los elementos por la clase {@code audio libros},
+     * hace un {@code casteo} y devuelve una lista de objetos.
+     * Se evalua que la lista no este vacía, si es así, se lanza un error,
+     * de lo contrario se imprimen los detalles de cada audio libro.*/
+    public void mostrarAudioLibroDisponibles(){
+        List<AudioLibro> audioLibrosDisponibles = coleccionItems.stream().filter(i -> i instanceof AudioLibro)
+                .filter(i -> !i.isEstado()).map(i -> (AudioLibro) i).collect(Collectors.toList());
+
+        if (audioLibrosDisponibles.isEmpty()){
+            throw new IllegalArgumentException("No hay libros registrados.");
+        }
+
+        for (AudioLibro audioLibro : audioLibrosDisponibles){
+            audioLibro.mostrarDetalle(audioLibro);
+        }
+    }
+
+    public void bItemPorID(String idItem){
+        if (idItem == null){
+            throw new IllegalArgumentException("El item no puede ser nulo.");
+        }
+
+        Optional<Items_Bibliograficos> itemOptional = buscarItemPorID(idItem);
+
+        if (!itemOptional.isPresent()){
+            throw new IllegalArgumentException("El item no esta registrado.");
+        }
+
+        Items_Bibliograficos item = itemOptional.get();
+
+        mostrarDetalle(item);
     }
 }

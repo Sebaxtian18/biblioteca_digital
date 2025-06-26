@@ -1,5 +1,11 @@
 package org.biblioteca;
 
+/**
+ * Representa la plantilla de la cual se crearan los diferentes items.
+ * Abstrae cinco atributos que compartiran los diferentes items e implementa un metodo abstracto para
+ * que cada item muestre sus detalles.
+ * Se sobre escriben los metodos {@code equals} y {@code hashCode} para lograr comparar los items
+ * por su id y no solo su espacio en memoria.*/
 public abstract class Items_Bibliograficos {
     protected String titulo;
     protected String autor;
@@ -58,8 +64,10 @@ public abstract class Items_Bibliograficos {
         this.id = id;
     }
 
+    /**Metodo para mostrar los detalles de cada {@code item}*/
     public abstract void mostrarDetalle(Items_Bibliograficos item);
 
+    /**Sobre escritura del metodo {@code equals} para comparar el objeto por su {@id} y no solo por su espacio en memoria.*/
     @Override
     public boolean equals(Object o) {
         if (this == o) return true; // Si es el mismo objeto en memoria

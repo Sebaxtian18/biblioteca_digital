@@ -2,6 +2,9 @@ package org.biblioteca.Modelo;
 
 import org.biblioteca.Items_Bibliograficos;
 
+import java.util.List;
+
+/**Representa un item, hijo de {@code Items_Bibliograficos}*/
 public class Libro extends Items_Bibliograficos {
     private String isbn;
     private String numPaginas;
@@ -33,13 +36,19 @@ public class Libro extends Items_Bibliograficos {
         this.numPaginas = numPaginas;
     }
 
+    /**Sobe escritura e implementación del metodo mostrar detalle para el Libro*/
     @Override
     public void mostrarDetalle(Items_Bibliograficos item) throws IllegalArgumentException {
         if (item == null){
             throw new IllegalArgumentException("El item no puede ser nulo.");
         }
-        System.out.println(item);
+        System.out.println("------Detalles------");
+        System.out.println("- Titulo: '" + getTitulo() + "'");
+        System.out.println("- ID: '" + getId() + "'");
+        System.out.println("- Autor: '" + getAutor() + "'");
+        System.out.println("- ISBN: '" + getIsbn() + "'");
+        System.out.println("- Número de paginas: '" + getNumPaginas() + "'");
+        System.out.println("- Año Publicación: '" + getAnoPublic() + "'");
+        System.out.println(isEstado() ? "- El libro se encuentra prestado" : "- El libro se encuentra disponible.");
     }
-
-
 }
